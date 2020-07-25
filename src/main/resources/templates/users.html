@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf,org">
+<head>
+    <meta charset="UTF-8">
+    <title>查询所有</title>
+</head>
+<body>
+<a th:href="@{/user/toadd}">增加</a>
+<form method="post" th:action="@{/user/getUserByName}">
+    <input type="text" name="username" placeholder="请输入查询的用户名">
+    <input type="submit" value="查询">
+</form>
+    <table style="border: 1px solid red">
+        <tr>
+            <th>用户编号</th>
+            <th>用户账号</th>
+            <th>用户密码</th>
+            <th>操作</th>
+        </tr>
+        <tr th:each="user:${userList}">
+            <td th:text="${user.id}"></td>
+            <td th:text="${user.username}"></td>
+            <td th:text="${user.password}"></td>
+            <td>
+                <a th:href="@{/user/toupdate(id=${user.id})}">修改</a>
+                <a th:href="@{/user/delete(id=${user.id})}">删除</a>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
